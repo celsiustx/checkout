@@ -9,6 +9,7 @@ inputs:
       The branch, tag or SHA to checkout. When checking out the repository that
       triggered a workflow, this defaults to the reference or SHA for that
       event.  Otherwise, uses the default branch.
+    default: ${{ github.event.pull_request && github.head_ref || github.ref_name }}
   token:
     description: >
       Personal access token (PAT) used to fetch the repository. The PAT is configured
@@ -50,6 +51,7 @@ inputs:
     default: true
   path:
     description: 'Relative path under $GITHUB_WORKSPACE to place the repository'
+    default: ${{ github.event.repository.name }}
   clean:
     description: 'Whether to execute `git clean -ffdx && git reset --hard HEAD` before fetching'
     default: true
